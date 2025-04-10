@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSP Rocket Builder - Constructeur de fusées</title>
+    <!-- Ajoutez ici vos styles CSS et autres métadonnées -->
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>KSP Rocket Builder</h1>
+            <nav>
+                <!-- Navigation principale -->
+            </nav>
+        </header>
+        
+        <main>
+            <div id="leftPanel" class="panel">
+                <!-- Panneau de catalogue des pièces -->
+                <h2>Catalogue de pièces</h2>
+                <div id="partsSearch">
+                    <!-- Champ de recherche -->
+                </div>
+                <div id="partsList">
+                    <!-- Liste des pièces disponibles -->
+                </div>
+            </div>
+            
+            <div id="centerPanel" class="panel">
+                <!-- Panneau de visualisation 3D -->
+                <div id="threejsContainer">
+                    <!-- Conteneur pour le rendu Three.js -->
+                </div>
+                <div id="controlsContainer">
+                    <!-- Contrôles pour la manipulation 3D -->
+                </div>
+            </div>
+            
+            <div id="rightPanel" class="panel">
+                <!-- Panneau d'informations et statistiques -->
+                <h2>Informations</h2>
+                <div id="rocketStats">
+                    <!-- Statistiques de la fusée -->
+                </div>
+                <div id="deltaVDisplay">
+                    <!-- Affichage du Delta-V -->
+                </div>
+                <div id="stageManager">
+                    <!-- Gestionnaire d'étages -->
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <!-- Pied de page avec informations diverses -->
+            <p>KSP Rocket Builder v0.2.1 - Un projet pour Kerbal Space Program</p>
+        </footer>
+    </div>
+    
+    <!-- Chargement des scripts -->
+    <script src="src/engine/RocketEngine.js" type="module"></script>
+    <script src="src/api/DataAPI.js" type="module"></script>
+    <script src="src/utils/rocketPhysics.js" type="module"></script>
+    <!-- Script principal de l'application -->
+    <script type="module">
+        // Import des modules nécessaires
+        import { RocketEngine } from './src/engine/RocketEngine.js';
+        import { DataAPI } from './src/api/DataAPI.js';
+        import { calculateDeltaV } from './src/utils/rocketPhysics.js';
+        
+        // Initialisation de l'application
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialisation de l'API de données
+            const dataAPI = new DataAPI();
+            
+            // Initialisation du moteur 3D
+            const container = document.getElementById('threejsContainer');
+            const rocketEngine = new RocketEngine(container);
+            
+            // Autres initialisations
+            
+            console.log('KSP Rocket Builder initialized!');
+        });
+    </script>
+</body>
+</html>
