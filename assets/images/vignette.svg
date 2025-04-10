@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond sombre -->
+  <rect width="1200" height="630" fill="#202124"/>
+  
+  <!-- Étoiles de l'espace -->
+  <g fill="#FFFFFF">
+    <!-- De petites étoiles réparties aléatoirement -->
+    <circle cx="120" cy="80" r="1.5"/>
+    <circle cx="220" cy="180" r="1"/>
+    <circle cx="380" cy="120" r="1.2"/>
+    <circle cx="450" cy="220" r="0.8"/>
+    <circle cx="550" cy="90" r="1.5"/>
+    <circle cx="650" cy="170" r="1.3"/>
+    <circle cx="750" cy="110" r="1"/>
+    <circle cx="880" cy="180" r="0.9"/>
+    <circle cx="980" cy="80" r="1.2"/>
+    <circle cx="1080" cy="150" r="1.4"/>
+    <circle cx="100" cy="320" r="1.3"/>
+    <circle cx="230" cy="380" r="0.9"/>
+    <circle cx="320" cy="450" r="1.1"/>
+    <circle cx="450" cy="480" r="1.2"/>
+    <circle cx="520" cy="390" r="0.8"/>
+    <circle cx="650" cy="430" r="1.4"/>
+    <circle cx="780" cy="380" r="1"/>
+    <circle cx="850" cy="520" r="0.9"/>
+    <circle cx="950" cy="420" r="1.2"/>
+    <circle cx="1050" cy="470" r="1.3"/>
+    <circle cx="1150" cy="350" r="1.1"/>
+    <!-- Plus d'étoiles plus grandes réparties aléatoirement -->
+    <circle cx="180" cy="150" r="2.5"/>
+    <circle cx="320" cy="80" r="2.2"/>
+    <circle cx="480" cy="190" r="2.8"/>
+    <circle cx="680" cy="130" r="2.4"/>
+    <circle cx="830" cy="70" r="2.6"/>
+    <circle cx="980" cy="220" r="2.2"/>
+    <circle cx="1130" cy="110" r="2.5"/>
+    <circle cx="150" cy="420" r="2.3"/>
+    <circle cx="280" cy="480" r="2.5"/>
+    <circle cx="380" cy="350" r="2.2"/>
+    <circle cx="580" cy="460" r="2.7"/>
+    <circle cx="730" cy="480" r="2.4"/>
+    <circle cx="880" cy="420" r="2.6"/>
+    <circle cx="1020" cy="390" r="2.3"/>
+    <circle cx="1130" cy="450" r="2.5"/>
+  </g>
+  
+  <!-- Sphère représentant Kerbin -->
+  <circle cx="180" cy="450" r="120" fill="#2B7BF2"/>
+  <!-- Continents stylisés -->
+  <path d="M130,380 Q170,350 200,370 Q230,390 250,380 Q270,370 280,390 Q290,410 270,440 Q250,470 220,460 Q190,450 160,470 Q130,490 110,460 Q90,430 130,380" fill="#4CAF50"/>
+  <path d="M100,430 Q120,410 150,420 Q180,430 170,460 Q160,490 130,480 Q100,470 100,430" fill="#4CAF50"/>
+  
+  <!-- Fusée stylisée -->
+  <g transform="translate(600, 315) rotate(-15)">
+    <!-- Corps principal -->
+    <rect x="-30" y="-150" width="60" height="240" fill="#E0E0E0" rx="10"/>
+    <!-- Coiffe -->
+    <path d="M-30,-150 L0,-200 L30,-150 Z" fill="#E0E0E0"/>
+    <!-- Moteurs -->
+    <rect x="-30" y="90" width="20" height="30" fill="#F44336"/>
+    <rect x="10" y="90" width="20" height="30" fill="#F44336"/>
+    <!-- Ailerons -->
+    <path d="M-30,0 L-70,60 L-30,60 Z" fill="#E0E0E0"/>
+    <path d="M30,0 L70,60 L30,60 Z" fill="#E0E0E0"/>
+    <!-- Fenêtres/détails -->
+    <circle cx="0" cy="-100" r="10" fill="#1a73e8"/>
+    <rect x="-15" y="-70" width="30" height="10" fill="#1a73e8"/>
+    <rect x="-15" y="-40" width="30" height="10" fill="#1a73e8"/>
+    <!-- Tuyères des moteurs -->
+    <path d="M-25,120 L-15,150 L-5,120 Z" fill="#FFB300"/>
+    <path d="M15,120 L25,150 L35,120 Z" fill="#FFB300"/>
+  </g>
+  
+  <!-- Étoile/soleil lointain -->
+  <circle cx="1050" cy="150" r="50" fill="#FFB300"/>
+  <circle cx="1050" cy="150" r="65" fill="#FFB300" opacity="0.3"/>
+  <circle cx="1050" cy="150" r="80" fill="#FFB300" opacity="0.1"/>
+  
+  <!-- Texte du titre -->
+  <text x="600" y="150" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#1a73e8" text-anchor="middle">KSP Rocket Builder</text>
+  
+  <!-- Sous-titre -->
+  <text x="600" y="210" font-family="Arial, sans-serif" font-size="26" fill="#E8EAED" text-anchor="middle">Construisez, analysez et optimisez vos fusées pour Kerbal Space Program</text>
+  
+  <!-- Version -->
+  <text x="600" y="550" font-family="Arial, sans-serif" font-size="20" fill="#E8EAED" text-anchor="middle">v0.2.1 - Modularisation du DataValidator</text>
+</svg>
