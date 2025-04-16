@@ -166,98 +166,122 @@ export const calculateBurnTime = (engines, fuelMass) => {
   
   engines.forEach(engine => {
     const engineData = _getEngineData(engine.partId);
-    // Le débit massique est calculé comme: Poussée / (Isp * g0)
-    const massFlow = engineData.thrust / (engineData.isp.atmosphereLevel1 * KERBIN_GRAVITY);
-    totalFuelConsumption += massFlow;
+    
+    // Consommation de carburant = poussée / (Isp * g0)
+    const fuelConsumption = engineData.thrust / (engineData.isp.atmosphereLevel1 * KERBIN_GRAVITY);
+    totalFuelConsumption += fuelConsumption;
   });
   
-  // Temps de combustion = masse de carburant / débit massique total
-  return totalFuelConsumption > 0 ? fuelMass / totalFuelConsumption : 0;
+  if (totalFuelConsumption <= 0) return 0;
+  
+  // Temps = masse de carburant / consommation
+  return fuelMass / totalFuelConsumption;
 };
 
 /**
- * Récupère les données d'un moteur (simulation)
+ * Récupère les données d'un moteur par son ID
  * @private
- * @param {string} engineId - Identifiant du moteur
+ * @param {string} engineId - ID du moteur
  * @returns {Object} Données du moteur
  */
 const _getEngineData = (engineId) => {
-  // Ceci est une simulation pour l'exemple
-  // Dans une implémentation réelle, ces données viendraient d'une API
-  const engineDatabase = {
-    'lv-t30': {
-      name: 'LV-T30 Liquid Fuel Engine',
-      thrust: 215.0, // kN
-      isp: {
-        atmosphereLevel0: 320, // sec (vide)
-        atmosphereLevel1: 290  // sec (niveau de la mer)
-      }
+  // Dans une implémentation réelle, ces données viendraient d'une API ou d'une base de données
+  // Ceci est juste un exemple
+  const engineData = {
+    // ID du moteur
+    id: engineId,
+    
+    // Poussée en Newtons
+    thrust: 100000,
+    
+    // ISP à différents niveaux d'atmosphère
+    isp: {
+      // ISP dans le vide
+      atmosphereLevel0: 350,
+      
+      // ISP au niveau de la mer
+      atmosphereLevel1: 300
     },
-    'lv-t45': {
-      name: 'LV-T45 Liquid Fuel Engine',
-      thrust: 200.0, // kN
-      isp: {
-        atmosphereLevel0: 320, // sec (vide)
-        atmosphereLevel1: 290  // sec (niveau de la mer)
-      }
-    },
-    'reliant': {
-      name: 'RE-L10 "Reliant" Liquid Fuel Engine',
-      thrust: 240.0, // kN
-      isp: {
-        atmosphereLevel0: 310, // sec (vide)
-        atmosphereLevel1: 265  // sec (niveau de la mer)
-      }
-    }
+    
+    // Consommation de carburant en kg/s
+    fuelConsumption: 10
   };
   
-  return engineDatabase[engineId] || {
-    thrust: 0,
-    isp: { atmosphereLevel0: 0, atmosphereLevel1: 0 }
-  };
+  return engineData;
 };
 
 /**
- * Récupère les données d'une pièce (simulation)
+ * Récupère les données d'une pièce par son ID
  * @private
- * @param {string} partId - Identifiant de la pièce
+ * @param {string} partId - ID de la pièce
  * @returns {Object} Données de la pièce
  */
 const _getPartData = (partId) => {
-  // Ceci est une simulation pour l'exemple
-  // Dans une implémentation réelle, ces données viendraient d'une API
-  const partDatabase = {
-    'mk1-command-pod': {
-      name: 'Mk1 Command Pod',
-      category: 'command',
-      mass: 0.84 // tonnes
-    },
-    'fl-t400': {
-      name: 'FL-T400 Fuel Tank',
-      category: 'fuel_tank',
-      mass: 2.25, // tonnes (plein)
-      dryMass: 0.25 // tonnes (vide)
-    },
-    'fl-t800': {
-      name: 'FL-T800 Fuel Tank',
-      category: 'fuel_tank',
-      mass: 4.5, // tonnes (plein)
-      dryMass: 0.5 // tonnes (vide)
-    }
+  // Dans une implémentation réelle, ces données viendraient d'une API ou d'une base de données
+  // Ceci est juste un exemple
+  const partData = {
+    // ID de la pièce
+    id: partId,
+    
+    // Catégorie de la pièce
+    category: 'fuel_tank',
+    
+    // Masse totale en kg
+    mass: 1000,
+    
+    // Masse à vide pour les réservoirs
+    dryMass: 100
   };
   
-  return partDatabase[partId] || { mass: 0, category: 'unknown' };
+  return partData;
 };
 
 /**
- * Calcule l'efficacité d'une fusée
- * Ratio Delta-V / masse totale
+ * Calcule l'efficacité de la fusée (ratio DeltaV / masse)
  * 
- * @param {number} deltaV - Delta-V en m/s
- * @param {number} totalMass - Masse totale en kg
- * @returns {number} Efficacité (Delta-V / masse)
+ * @param {number} deltaV - Delta-V de la fusée
+ * @param {number} totalMass - Masse totale
+ * @returns {number} Efficacité en m/s par kg
  */
 export const calculateEfficiency = (deltaV, totalMass) => {
   if (totalMass <= 0) return 0;
   return deltaV / totalMass;
+};
+
+/**
+ * Estime la hauteur maximale atteignable
+ * 
+ * @param {number} deltaV - Delta-V disponible
+ * @param {number} initialTWR - TWR initial
+ * @returns {number} Hauteur estimée en mètres
+ */
+export const estimateMaxHeight = (deltaV, initialTWR) => {
+  if (deltaV <= 0 || initialTWR <= 0) return 0;
+  
+  // Calcul simplifié basé sur une approximation
+  // Dans un cas réel, il faudrait une simulation complète
+  
+  // Si TWR < 1, la fusée ne peut pas décoller
+  if (initialTWR < 1) return 0;
+  
+  // Vitesse nécessaire pour l'orbite basse de Kerbin
+  const orbitalVelocity = 2200; // m/s
+  
+  // Pertes dues à la traînée et à la gravité (estimation)
+  const gravityDragLoss = 1500; // m/s
+  
+  // Delta-V requis pour l'orbite
+  const requiredDeltaV = orbitalVelocity + gravityDragLoss;
+  
+  if (deltaV < requiredDeltaV) {
+    // Estimation approximative pour les vols suborbitaux
+    return (deltaV / requiredDeltaV) * KERBIN_ATMOSPHERE_HEIGHT;
+  } else {
+    // Pour les vols orbitaux, calculer l'altitude maximale
+    const excessDeltaV = deltaV - requiredDeltaV;
+    const baseOrbit = 80000; // m, orbite basse de Kerbin
+    
+    // Estimation de l'altitude supplémentaire en fonction du Delta-V excédentaire
+    return baseOrbit + (excessDeltaV * 100);
+  }
 };
