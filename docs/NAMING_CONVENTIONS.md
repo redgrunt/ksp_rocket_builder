@@ -65,27 +65,56 @@ const ERROR_TYPES = {
 };
 ```
 
-## Vérification Automatique
+## Outils de standardisation
 
-Pour faciliter le respect de ces conventions, nous avons mis en place des règles ESLint. Pour exécuter la vérification:
+Pour faciliter le respect de ces conventions, nous avons mis en place plusieurs outils :
+
+### ESLint
+
+Une configuration ESLint complète est disponible à la racine du projet (`.eslintrc.js`). Pour utiliser ESLint :
 
 ```bash
+# Installation des dépendances
+npm install
+
+# Vérification du code
 npm run lint
-```
 
-Pour corriger automatiquement les problèmes simples:
-
-```bash
+# Correction automatique des problèmes simples
 npm run lint:fix
 ```
+
+### EditorConfig
+
+Un fichier `.editorconfig` est présent à la racine du projet pour assurer une cohérence des styles de code même sans ESLint. La plupart des IDE modernes supportent EditorConfig nativement ou via des plugins.
+
+## Tests et validation
+
+Après avoir modifié un fichier pour respecter les conventions de nommage, assurez-vous que :
+
+1. Les tests unitaires passent toujours : `npm test`
+2. ESLint ne signale pas d'erreurs : `npm run lint`
+3. Le comportement fonctionnel n'a pas été modifié (tests manuels)
+
+Si vous renommez des fonctions ou variables qui sont référencées dans d'autres fichiers, assurez-vous de mettre à jour toutes les références.
 
 ## Intégration dans Votre Workflow
 
 Voici quelques conseils pour intégrer ces conventions dans votre workflow de développement:
 
-1. Configurez votre éditeur pour utiliser ESLint (la plupart des IDE modernes prennent en charge ESLint via des plugins).
-2. Exécutez `npm run lint` avant chaque commit pour vous assurer que votre code respecte les conventions.
-3. Pensez aux conventions pendant que vous codez, pas seulement lors de la revue de code.
+1. Configurez votre éditeur pour utiliser ESLint et EditorConfig
+2. Exécutez `npm run lint` avant chaque commit pour vous assurer que votre code respecte les conventions
+3. Configurez votre IDE pour appliquer le formatage automatiquement à la sauvegarde
+4. Incluez la vérification des conventions dans vos revues de code
+
+## Extension au-delà des conventions de nommage
+
+Ces conventions font partie d'un ensemble plus large de bonnes pratiques de codage. Elles devraient être complétées par :
+
+- Des conventions de formatage (indentation, espaces, etc.)
+- Des pratiques de documentation (JSDoc, commentaires)
+- Des standards pour la gestion des erreurs
+- Des directives pour l'organisation des fichiers et modules
 
 ## Questions Fréquentes
 
@@ -100,6 +129,17 @@ JavaScript n'avait traditionnellement pas de concept de méthodes véritablement
 ### Pourquoi UPPER_SNAKE_CASE pour les constantes?
 
 Cette convention permet de distinguer visuellement les constantes des variables régulières, ce qui est particulièrement utile pour identifier rapidement les valeurs qui ne devraient pas changer.
+
+### Comment gérer les noms longs en camelCase?
+
+Pour les noms très longs, assurez-vous que chaque mot composant le nom est clairement identifiable. Par exemple : `calculateTotalRocketMassWithPayload` est plus lisible que `calctotrcktmasswithpld`.
+
+### Comment traiter les acronymes dans les noms?
+
+Pour les acronymes comme "API", "HTTP", "URL", etc. :
+- Dans camelCase, gardez l'acronyme en majuscules s'il est au début, sinon en minuscules : `apiRequest`, `getApiUrl`
+- Dans PascalCase, gardez les acronymes en majuscules : `HTTPRequest`, `APIController`
+- Dans UPPER_SNAKE_CASE, tout est en majuscules : `API_REQUEST_TIMEOUT`
 
 ## Ressources Complémentaires
 
