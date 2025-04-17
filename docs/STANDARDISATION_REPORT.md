@@ -140,6 +140,61 @@ this.KERBIN_RADIUS = 600000; // m
 
 La constante `VERSION` a été maintenue en UPPER_SNAKE_CASE pour suivre la convention.
 
+## Outils et Configuration
+
+Pour aider à maintenir ces conventions, nous avons mis en place plusieurs outils:
+
+### 1. ESLint
+
+Une configuration ESLint complète a été ajoutée avec des règles spécifiques pour chaque convention de nommage. Les dépendances nécessaires ont été ajoutées au package.json:
+
+```json
+"devDependencies": {
+  "@typescript-eslint/eslint-plugin": "^5.59.0",
+  "@typescript-eslint/parser": "^5.59.0",
+  "eslint": "^8.38.0"
+}
+```
+
+### 2. EditorConfig
+
+Un fichier `.editorconfig` a été ajouté pour assurer une cohérence dans tous les IDE, même sans ESLint:
+
+```
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
+```
+
+### 3. Scripts npm
+
+Des scripts npm ont été ajoutés pour faciliter la vérification:
+
+```json
+"scripts": {
+  "lint": "eslint src/**/*.js",
+  "lint:fix": "eslint src/**/*.js --fix"
+}
+```
+
+## Tests et Validation
+
+Bien que les modifications ne changent que les noms et non la logique du code, il est recommandé de:
+
+1. Exécuter la suite de tests existante pour vérifier que les changements n'ont pas d'impact: `npm test`
+2. Effectuer des tests manuels sur les fonctionnalités clés qui utilisent les composants modifiés
+
+Pour les futures modifications, il serait utile d'ajouter des tests spécifiques qui vérifient que les fonctions renommées sont correctement référencées à travers le code.
+
 ## Résultats et Bénéfices
 
 Suite à ces modifications, le code du projet KSP Rocket Builder présente désormais une cohérence accrue dans ses conventions de nommage. Cela apporte plusieurs avantages:
@@ -153,9 +208,19 @@ Suite à ces modifications, le code du projet KSP Rocket Builder présente déso
 
 Pour maintenir cette cohérence à l'avenir, nous recommandons:
 
-1. **Documentation**: Maintenir à jour la documentation des conventions de nommage.
-2. **Linting**: Mettre en place des règles ESLint pour vérifier automatiquement le respect des conventions.
-3. **Revues de code**: Porter une attention particulière aux conventions de nommage lors des revues de code.
-4. **Formation**: Sensibiliser les nouveaux contributeurs aux conventions établies.
+1. **Intégration continue**:
+   - Configurer le pipeline CI pour exécuter `npm run lint` et signaler les erreurs de conventions
+
+2. **Configuration des IDE**:
+   - Encourager tous les développeurs à installer les plugins ESLint et EditorConfig dans leurs IDE
+   - Configurer les IDE pour appliquer automatiquement les règles lors de la sauvegarde
+
+3. **Formation**:
+   - Partager le document `NAMING_CONVENTIONS.md` avec tous les contributeurs
+   - Organiser une session de formation sur les conventions lors de l'intégration de nouveaux développeurs
+
+4. **Revues de code**:
+   - Inclure explicitement la vérification des conventions de nommage dans les listes de contrôle pour les revues de code
+   - Configurer des outils de revue automatique pour signaler les violations de conventions
 
 Ces mesures contribueront à assurer la qualité et la maintenabilité du code sur le long terme.
